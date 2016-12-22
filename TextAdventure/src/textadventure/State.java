@@ -7,7 +7,6 @@ package textadventure;
 
 import Maps.IMap;
 import Maps.OverWorld;
-import SharedLibrary.Position;
 
 /**
  *
@@ -23,18 +22,8 @@ public class State {
         this.currentCharacterMap = this.overWorld;
     }
     
-    public void SetCharacterPosition(int x, int y)
-    {
-        this.currentCharacterMap.SetCharacterPosition(x, y);
-    }
-    
     public IMap GetCurrentMap()
     {
         return this.currentCharacterMap;
-    }
-    
-    public Position GetCharacterPosition()
-    {
-        return this.currentCharacterMap.CharacterPosition();
     }
 }

@@ -5,8 +5,10 @@
  */
 package Maps;
 
+import IO.PrintMap;
 import Maps.Tiles.ITile;
 import SharedLibrary.Position;
+import java.io.IOException;
 /**
  *
  * @author MaxM
@@ -35,5 +37,16 @@ public abstract class IMap {
     public String TileDescription(int x, int y)
     {
         return this.grid[x][y].Description();
+    }
+    
+    public void SetVisited(int x, int y, boolean visited)
+    {
+        this.grid[x][y].SetVisited(visited);
+    }
+    
+    public void PrintMap() throws IOException
+    {
+        PrintMap printer = new PrintMap();
+        printer.WriteMap(this.grid);
     }
 }

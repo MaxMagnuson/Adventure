@@ -21,4 +21,21 @@ public abstract class ITile {
     {
         return this.description;
     }
+    
+    protected boolean visited = false;
+    public void SetVisited(boolean visited)
+    {
+        this.visited = visited;
+    }
+    
+    public boolean HasVisited()
+    {
+        return this.visited;
+    }
+    
+    protected char representation;
+    public char GraphicalRepresentation()
+    {
+        return this.representation;
+    }
 }

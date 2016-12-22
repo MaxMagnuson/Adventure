@@ -58,6 +58,7 @@ public class Walk implements ICommand {
         {
             output.add("You are too feeble to travel in that direction.");
         }
+        currentMap.SetVisited(x, y, true);
         output.add(state.GetCurrentMap().TileDescription(x, y));
         return output;
     }

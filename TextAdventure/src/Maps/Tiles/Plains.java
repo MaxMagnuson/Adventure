@@ -13,6 +13,7 @@ public class Plains extends ITile {
     public Plains()
     {
         this.travelable = true;
-        this.description = "You are standing in a beautiful plains";
+        this.description = "You are standing in a beautiful plain";
+        this.representation = 'p';
     }
 }

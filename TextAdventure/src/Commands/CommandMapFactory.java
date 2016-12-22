@@ -18,10 +18,15 @@ public class CommandMapFactory {
     {
         this.commandMap = new HashMap<String, ICommand>();
         this.commandMap.put("walk", new Walk());
+        this.commandMap.put("print", new Print());
     }
     
     public ICommand Command(String key)
     {
-        return this.commandMap.get(key);
+        if(this.commandMap.containsKey(key))
+        {
+            return this.commandMap.get(key);
+        }
+        return null;
     }
 }

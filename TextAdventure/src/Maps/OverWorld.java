@@ -17,26 +17,28 @@ import SharedLibrary.Position;
 public class OverWorld extends IMap {
     public OverWorld(int x, int y)
     {
-        this.grid = new ITile[10][10];
+        this.grid = new ITile[50][15];
         this.characterPosition = new Position(x, y);
         this.FillTiles();
     }
     
     void FillTiles()
     {
-        for(int x = 0; x < 10; x++)
+        int xMax = this.grid.length;
+        int yMax = this.grid[0].length;
+        for(int x = 0; x < xMax; x++)
         {
-            this.grid[0][x] = new Mountain();
-            this.grid[9][x] = new Mountain();
+            this.grid[x][0] = new Mountain();
+            this.grid[x][yMax-1] = new Mountain();
         }
-        for(int y = 1; y < 9; y++)
+        for(int y = 1; y < yMax - 1; y++)
         {
-            this.grid[y][0] = new Mountain();
-            for(int x = 1; x < 9; x++)
+            this.grid[0][y] = new Mountain();
+            for(int x = 1; x < xMax - 1; x++)
             {
                 this.grid[x][y] = new Plains();
             }
-            this.grid[y][9] = new Mountain();
+            this.grid[xMax-1][y] = new Mountain();
         }
     }
 }

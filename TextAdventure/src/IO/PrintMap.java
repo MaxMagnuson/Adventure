@@ -14,10 +14,13 @@ import java.io.IOException;
  * @author MaxM
  */
 public class PrintMap {
+    private int paddingCeiling = 2;
     public void WriteMap(ITile[][] map) throws IOException
     {
-        FileWriter writer = new FileWriter("C:\\Users\\MaxM\\Documents\\GitHub\\Adventure\\Overworld.txt");
-        String line = "   ";
+        this.SetPadding(map);
+        
+        FileWriter writer = new FileWriter("D:\\Adventure\\Overworld.txt");
+        String line = AddPadding(" ", " ") + " ";
         for(int x = 0; x < map.length; x++)
         {
             String nextPart = "" + x;
@@ -37,12 +40,13 @@ public class PrintMap {
             {
                 if(map[x][y].HasVisited())
                 {
-                    line += " " + map[x][y].GraphicalRepresentation() + " ";
+                    line += AddPadding(map[x][y].GraphicalRepresentation() + "", " ");
                 }
                 else
                 {
-                    line += "   ";
+                    line += AddPadding(" ", " ");
                 }
+                line += " ";
             }
             line += "\r\n";
             writer.write(line);
@@ -52,10 +56,22 @@ public class PrintMap {
     
     private String AddPadding(String number, String pad)
     {
-        if(number.length() < 2)
+        String padded = number;
+        while(padded.length() < this.paddingCeiling)
         {
-            return pad + number;
+            padded = pad + padded;
         }
-        return number;
+        return padded;
+    }
+    
+    private void SetPadding(ITile[][] grid)
+    {
+        this.paddingCeiling = 1;
+        int length = grid.length;
+        while(length > 9)
+        {
+            this.paddingCeiling++;
+            length /= 10;
+        }
     }
 }

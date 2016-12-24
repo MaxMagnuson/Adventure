@@ -17,7 +17,7 @@ import SharedLibrary.Position;
 public class OverWorld extends IMap {
     public OverWorld(int x, int y)
     {
-        this.grid = new ITile[50][15];
+        this.grid = new ITile[10][10];
         this.characterPosition = new Position(x, y);
         this.FillTiles();
     }

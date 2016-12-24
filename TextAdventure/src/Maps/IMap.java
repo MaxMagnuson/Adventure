@@ -47,6 +47,6 @@ public abstract class IMap {
     public void PrintMap() throws IOException
     {
         PrintMap printer = new PrintMap();
-        printer.WriteMap(this.grid);
+        printer.WriteMap(this.grid, this.characterPosition.X(), this.characterPosition.Y());
     }
 }

@@ -15,10 +15,13 @@ import java.io.IOException;
  */
 public class PrintMap {
     private int paddingCeiling = 2;
-    public void WriteMap(ITile[][] map) throws IOException
+    private MapDescription key;
+    public void WriteMap(ITile[][] map, int characterX, int characterY) throws IOException
     {
         this.SetPadding(map);
+        this.key = new MapDescription();
         
+        //Label x axis
         FileWriter writer = new FileWriter("D:\\Adventure\\Overworld.txt");
         String line = AddPadding(" ", " ") + " ";
         for(int x = 0; x < map.length; x++)
@@ -33,24 +36,31 @@ public class PrintMap {
         
         for(int y = 0; y < map[0].length; y++)
         {
-            
             line = AddPadding("" + y, "0");
             line += " ";
             for(int x = 0; x < map.length; x++)
             {
-                if(map[x][y].HasVisited())
+                if(x == characterX && y == characterY)
                 {
-                    line += AddPadding(map[x][y].GraphicalRepresentation() + "", " ");
+                    line += AddPadding("c", " ");
+                }
+                else if(map[x][y].HasVisited())
+                {
+                    String rep = "" + map[x][y].GraphicalRepresentation();
+                    line +=  AddPadding(rep, " ");
+                    this.key.Put(rep, map[x][y].Name());
                 }
                 else
                 {
-                    line += AddPadding(" ", " ");
+                    line += AddPadding("*", " ");
+                    this.key.Put("*", "Unknown Territory");
                 }
                 line += " ";
             }
             line += "\r\n";
             writer.write(line);
         }
+        writer.write(this.key.toString());
         writer.close();
     }
     

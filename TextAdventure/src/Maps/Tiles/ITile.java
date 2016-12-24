@@ -38,4 +38,10 @@ public abstract class ITile {
     {
         return this.representation;
     }
+    
+    protected String name;
+    public String Name()
+    {
+        return this.name;
+    }
 }

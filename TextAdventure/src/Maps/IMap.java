@@ -34,6 +34,11 @@ public abstract class IMap {
         return this.grid[x][y].Travelable();
     }
     
+    public boolean TileVisited(int x, int y)
+    {
+        return this.grid[x][y].HasVisited();
+    }
+    
     public String TileDescription(int x, int y)
     {
         return this.grid[x][y].Description();
@@ -48,5 +53,10 @@ public abstract class IMap {
     {
         PrintMap printer = new PrintMap();
         printer.WriteMap(this.grid, this.characterPosition.X(), this.characterPosition.Y());
+    }
+    
+    public boolean InBounds(int x, int y)
+    {
+        return x >= 0 && x < this.grid.length && y >= 0 && y < this.grid.length;
     }
 }

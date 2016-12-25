@@ -43,4 +43,16 @@ public class Position {
     {
         return this.y;
     }
+    
+    public boolean equals(Position diff)
+    {
+        return (this.x == diff.X()) && (this.y == diff.Y());
+    }
+    
+    public int ManhattanDist(Position diff)
+    {
+        int xDist = Math.abs(this.x - diff.X());
+        int yDist = Math.abs(this.y - diff.Y());
+        return xDist + yDist;
+    }
 }

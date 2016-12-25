@@ -19,6 +19,7 @@ public class CommandMapFactory {
         this.commandMap = new HashMap<String, ICommand>();
         this.commandMap.put("walk", new Walk());
         this.commandMap.put("print", new Print());
+        this.commandMap.put("travel", new Travel());
     }
     
     public ICommand Command(String key)

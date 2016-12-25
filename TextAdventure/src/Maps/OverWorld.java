@@ -20,6 +20,7 @@ public class OverWorld extends IMap {
         this.grid = new ITile[10][10];
         this.characterPosition = new Position(x, y);
         this.FillTiles();
+        this.grid[x][y].SetVisited(true);
     }
     
     void FillTiles()

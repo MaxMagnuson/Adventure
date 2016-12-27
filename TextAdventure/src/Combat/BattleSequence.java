@@ -55,28 +55,46 @@ public class BattleSequence {
         {
             BattlePriority current = queue.Next();
             ICreature currentCreature = current.Creature();
-            if(!currentCreature.IsDead())
+            // TODO: add error handling
+            if(currentCreature instanceof Player)
             {
-                // TODO: add error handling
-                if(currentCreature instanceof Player)
+                String mapString = this.battleMap.toString();
+                Prompt prompt = new Prompt();
+                ArrayList<String> messagesToPlayer = new ArrayList<String>();
+                messagesToPlayer.add(mapString);
+                String[] commandInput = prompt.Ask(messagesToPlayer);
+
+                String[] actions = new String[commandInput.length-1];
+                System.arraycopy(commandInput, 1, actions, 0, actions.length);
+                ICommand command = this.commands.Command(commandInput[0]);
+                ArrayList<String> output = command.Act(actions, this.state);
+                //TODO: Move into IO
+                for(String out : output)
                 {
-                    String mapString = this.battleMap.toString();
-                    Prompt prompt = new Prompt();
-                    ArrayList<String> messagesToPlayer = new ArrayList<String>();
-                    messagesToPlayer.add(mapString);
-                    String[] commandInput = prompt.Ask(messagesToPlayer);
-                    
-                    String[] actions = new String[commandInput.length-1];
-                    System.arraycopy(commandInput, 1, actions, 0, actions.length);
-                    ICommand command = this.commands.Command(commandInput[0]);
-                    ArrayList<String> output = command.Act(actions, this.state);
-                    //TODO: Move into IO
-                    for(String out : output)
-                    {
-                        System.out.println(out);
-                    }
+                    System.out.println(out);
                 }
             }
+            else
+            {
+                // TODO: Will need to do actions before dying
+                if(currentCreature.IsDead())
+                {
+                    this.state.GetCurrentMap().RemoveNPC(currentCreature);
+                    queue.Remove(walk);
+                }
+                else if(currentCreature.Health().MortallyWounded())
+                {
+                    currentCreature.SetDeath(true);
+                }
+            }
+        }
+        if(state.GetPlayer().IsDead())
+        {
+            //TODO: Add gameover conditions
+        }
+        else
+        {
+            System.out.println("You are victorious!");
         }
     }
     
@@ -86,6 +104,9 @@ public class BattleSequence {
         ICreature bat = new Bat("Bat One");
         this.enemies.add(bat);
         this.battleMap.AddNPC(new NPC(bat, new Position(2, 2)));
+        ICreature batTwo = new Bat("Bat Two");
+        this.enemies.add(batTwo);
+        this.battleMap.AddNPC(new NPC(batTwo, new Position(1, 1)));
     }
     
     private class PriorityQueue
@@ -109,6 +130,18 @@ public class BattleSequence {
                 }
             }
             this.queue.add(battleEntity);
+        }
+        
+        public void Remove(BattlePriority battleEntity)
+        {
+            for(int i = 0; i < this.queue.size(); i++)
+            {
+                if(this.queue.get(i).Creature().Name().equals(battleEntity.Creature().Name()))
+                {
+                    this.queue.remove(i);
+                    this.index--;
+                }
+            }
         }
         
         public int Size()

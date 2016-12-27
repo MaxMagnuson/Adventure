@@ -31,7 +31,7 @@ public class CommandMapFactory {
         }
         else if(set == CommandSet.COMBAT)
         {
-            
+            this.commandMap.put("attack", new Attack());
         }
         this.commandMap.put("walk", new Walk());
         this.commandMap.put("travel", new Travel());

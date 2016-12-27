@@ -10,7 +10,6 @@ import IO.MapDescription;
 import Maps.Tiles.ITile;
 import SharedLibrary.NPC;
 import SharedLibrary.Position;
-import java.io.IOException;
 import java.util.ArrayList;
 /**
  *
@@ -66,6 +65,15 @@ public abstract class IMap {
         }
     }
     
+    public ICreature GetNPC(Position pos)
+    {
+        if(grid[pos.X()][pos.Y()].Occupied())
+        {
+            return grid[pos.X()][pos.Y()].CreatureInTile();
+        }
+        return null;
+    }
+    
     public Position GetNPCPosition(ICreature creature)
     {
         for(int i = 0; i < this.npcs.size(); i++)
@@ -89,6 +97,19 @@ public abstract class IMap {
             }
         }
         return false;
+    }
+    
+    public void RemoveNPC(ICreature creature)
+    {
+        for(int i = 0; i < npcs.size(); i++)
+        {
+            NPC current = npcs.get(i);
+            if(npcs.get(i).Creature().Name().equals(creature.Name()))
+            {
+                this.grid[current.Position().X()][current.Position().Y()].UnoccupyTile();
+                this.npcs.remove(i);
+            }
+        }
     }
     
     public boolean TileTravelable(int x, int y)

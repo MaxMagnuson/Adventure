@@ -58,7 +58,7 @@ public abstract class ICreature {
         return this.dead;
     }
     
-    private void SetDeath(boolean dead)
+    public void SetDeath(boolean dead)
     {
         this.dead = dead;
     }

@@ -27,9 +27,26 @@ public class State {
         this.currentCharacterMap = this.overWorld;
     }
     
+    public State(ICreature player)
+    {
+        this.player = player;
+        this.overWorld = new OverWorld(5, 5, this.player);
+        this.currentCharacterMap = this.overWorld;
+    }
+    
     public IMap GetCurrentMap()
     {
         return this.currentCharacterMap;
+    }
+    
+    public void SetCurrentMap(IMap map)
+    {
+        this.currentCharacterMap = map;
+    }
+    
+    public ICreature GetPlayer()
+    {
+        return this.player;
     }
     
     public String FilePath()

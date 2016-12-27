@@ -17,5 +17,6 @@ public class OpenBattleTile extends ITile {
         this.representation = ' ';
         this.name = "Floor";
         this.creature = null;
+        this.visited = true;
     }
 }

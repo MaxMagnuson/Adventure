@@ -3,6 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Adventure/TextAdventure/src/textadventure/TextAdventure.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Combat/BattleSequence.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/IO/Prompt.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Commands/CommandMapFactory.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Maps/Tiles/OpenBattleTile.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/IO/PrintFile.java</file>
         </group>
     </open-files>

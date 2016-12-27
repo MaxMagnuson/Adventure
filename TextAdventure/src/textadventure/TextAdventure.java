@@ -8,6 +8,7 @@ package textadventure;
 import Combat.BattleSequence;
 import Commands.CommandMapFactory;
 import Commands.ICommand;
+import Creatures.ICreature;
 import Creatures.Player;
 import Maps.GenericBattleMap;
 import java.io.IOException;
@@ -52,8 +53,10 @@ public class TextAdventure {
             }
         }*/
         GenericBattleMap map = new GenericBattleMap();
-        Player player = new Player("Unnamed Hero");
-        BattleSequence sequence = new BattleSequence(map, player);
+        ICreature player = new Player("Unnamed Hero");
+        State state = new State(player);
+        state.SetCurrentMap(map);
+        BattleSequence sequence = new BattleSequence(state);
         sequence.Start();
     }
     

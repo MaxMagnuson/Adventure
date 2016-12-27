@@ -22,11 +22,12 @@ public class Prompt {
         }
     }
     
-    public String Ask(ArrayList<String> output)
+    public String[] Ask(ArrayList<String> output)
     {
         this.Tell(output);
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
-        return input;
+        input = input.toLowerCase();
+        return input.split(" ");
     }
 }

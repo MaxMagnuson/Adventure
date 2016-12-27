@@ -5,6 +5,9 @@
  */
 package Combat;
 
+import Commands.CommandMapFactory;
+import Commands.CommandMapFactory.CommandSet;
+import Commands.ICommand;
 import Creatures.Bat;
 import Creatures.ICreature;
 import Creatures.Player;
@@ -13,25 +16,28 @@ import Maps.IMap;
 import SharedLibrary.NPC;
 import SharedLibrary.Position;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import textadventure.State;
 
 /**
  *
  * @author xbone
  */
 public class BattleSequence {
-    private Player player;
+    private ICreature player;
     private ArrayList<ICreature> enemies;
     private IMap battleMap;
     private Prompt prompt;
+    private State state;
+    private CommandMapFactory commands;
     
-    public BattleSequence(IMap battleMap, Player player)
+    public BattleSequence(State state)
     {
-        this.battleMap = battleMap;
-        this.player = player;
+        this.battleMap = state.GetCurrentMap();
+        this.player = state.GetPlayer();
         this.GenerateEnemies();
         this.prompt =  new Prompt();
+        this.state = state;
+        this.commands = new CommandMapFactory(CommandSet.COMBAT);
     }
     
     public void Start()
@@ -44,19 +50,31 @@ public class BattleSequence {
         {
             queue.Put(new BattlePriority(this.enemies.get(i)));
         }
+        
         while(!queue.AllDeadButHero())
         {
             BattlePriority current = queue.Next();
             ICreature currentCreature = current.Creature();
             if(!currentCreature.IsDead())
             {
+                // TODO: add error handling
                 if(currentCreature instanceof Player)
                 {
                     String mapString = this.battleMap.toString();
                     Prompt prompt = new Prompt();
                     ArrayList<String> messagesToPlayer = new ArrayList<String>();
                     messagesToPlayer.add(mapString);
-                    prompt.Ask(messagesToPlayer);
+                    String[] commandInput = prompt.Ask(messagesToPlayer);
+                    
+                    String[] actions = new String[commandInput.length-1];
+                    System.arraycopy(commandInput, 1, actions, 0, actions.length);
+                    ICommand command = this.commands.Command(commandInput[0]);
+                    ArrayList<String> output = command.Act(actions, this.state);
+                    //TODO: Move into IO
+                    for(String out : output)
+                    {
+                        System.out.println(out);
+                    }
                 }
             }
         }

@@ -5,6 +5,8 @@
  */
 package Maps.Tiles;
 
+import Creatures.ICreature;
+
 /**
  *
  * @author MaxM
@@ -43,5 +45,26 @@ public abstract class ITile {
     public String Name()
     {
         return this.name;
+    }
+    
+    protected ICreature creature;
+    public ICreature CreatureInTile()
+    {
+        return this.creature;
+    }
+    
+    public void SetCreature(ICreature creature)
+    {
+        this.creature = creature;
+    }
+    
+    public boolean Occupied()
+    {
+        return this.creature != null;
+    }
+    
+    public void UnoccupyTile()
+    {
+        this.creature = null;
     }
 }

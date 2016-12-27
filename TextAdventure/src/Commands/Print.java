@@ -5,7 +5,7 @@
  */
 package Commands;
 
-import IO.PrintMap;
+import IO.PrintFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,7 +21,9 @@ public class Print implements ICommand {
     @Override
     public ArrayList<String> Act(String[] action, State state) {
         try {
-            state.GetCurrentMap().PrintMap();
+            String mapString = state.GetCurrentMap().toString();
+            PrintFile printer = new PrintFile();
+            printer.Print(mapString, state.FilePath());
         } catch (IOException ex) {
             Logger.getLogger(Print.class.getName()).log(Level.SEVERE, null, ex);
         }

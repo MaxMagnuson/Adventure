@@ -3,17 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Adventure/TextAdventure/src/Commands/Travel.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/textadventure/TextAdventure.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/SharedLibrary/Constants.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Maps/OverWorld.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Commands/Walk.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Maps/Tiles/Mountain.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Commands/CommandMapFactory.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Maps/IMap.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Maps/Tiles/Plains.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/IO/MapDescription.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/SharedLibrary/Position.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/IO/PrintFile.java</file>
         </group>
     </open-files>
 </project-private>

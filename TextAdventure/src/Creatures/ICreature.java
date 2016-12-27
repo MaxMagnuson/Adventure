@@ -5,17 +5,61 @@
  */
 package Creatures;
 
-import SharedLibrary.Position;
+import Combat.HealthBar;
+import Combat.Weapons.IWeapon;
 
 /**
  *
  * @author MaxM
  */
 public abstract class ICreature {
-    private String name;
-    protected String Name()
+    protected String name;
+    protected IWeapon weapon;
+    
+    //Stats
+    protected int minorToMajor;
+    protected int majorToMortal;
+    protected HealthBar health;
+    protected int speed;
+    public String Name()
     {
         return this.name;
     }
     
+    protected String graphicalRepresentation;
+    public String GraphicalRepresentation()
+    {
+        return this.graphicalRepresentation;
+    }
+    
+    public HealthBar Health()
+    {
+        return this.health;
+    }
+    
+    public int Speed()
+    {
+        return this.speed;
+    }
+    
+    public void EquipWeapon(IWeapon weapon)
+    {
+        this.weapon = weapon;
+    }
+    
+    public IWeapon Weapon()
+    {
+        return this.weapon;
+    }
+    
+    private boolean dead = false;
+    public boolean IsDead()
+    {
+        return this.dead;
+    }
+    
+    private void SetDeath(boolean dead)
+    {
+        this.dead = dead;
+    }
 }

@@ -5,8 +5,11 @@
  */
 package textadventure;
 
+import Combat.BattleSequence;
 import Commands.CommandMapFactory;
 import Commands.ICommand;
+import Creatures.Player;
+import Maps.GenericBattleMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,7 +26,7 @@ public class TextAdventure {
     public static void main(String[] args) throws IOException {
         //ConsoleHandler handler = new ConsoleHandler();
         //handler.Start();
-        Scanner scan = new Scanner(System.in);
+        /*Scanner scan = new Scanner(System.in);
         CommandMapFactory commandMap = new CommandMapFactory();
         State state = new State();
         while(true)
@@ -47,7 +50,11 @@ public class TextAdventure {
                     System.out.println(output);
                 }
             }
-        }
+        }*/
+        GenericBattleMap map = new GenericBattleMap();
+        Player player = new Player("Unnamed Hero");
+        BattleSequence sequence = new BattleSequence(map, player);
+        sequence.Start();
     }
     
 }

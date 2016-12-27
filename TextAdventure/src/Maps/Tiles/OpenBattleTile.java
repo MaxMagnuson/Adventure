@@ -9,13 +9,13 @@ package Maps.Tiles;
  *
  * @author MaxM
  */
-public class Plains extends ITile {
-    public Plains()
+public class OpenBattleTile extends ITile {
+    public OpenBattleTile()
     {
         this.travelable = true;
-        this.description = "You are standing in a beautiful plain";
-        this.representation = 'p';
-        this.name = "Plains";
+        this.description = "";
+        this.representation = ' ';
+        this.name = "Floor";
         this.creature = null;
     }
 }

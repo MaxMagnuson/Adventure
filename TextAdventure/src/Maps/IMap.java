@@ -5,10 +5,13 @@
  */
 package Maps;
 
-import IO.PrintMap;
+import Creatures.ICreature;
+import IO.MapDescription;
 import Maps.Tiles.ITile;
+import SharedLibrary.NPC;
 import SharedLibrary.Position;
 import java.io.IOException;
+import java.util.ArrayList;
 /**
  *
  * @author MaxM
@@ -17,16 +20,75 @@ public abstract class IMap {
     protected Position characterPosition;
     protected ITile[][] grid;
     abstract void FillTiles();
+    protected ArrayList<NPC> npcs;
     
+    /* Should probably be consolidated with MoveCreature at some point */
     public void SetCharacterPosition(int x, int y)
     {
-        this.characterPosition.SetX(x);
-        this.characterPosition.SetY(y);
+        ITile target = this.grid[x][y];
+        if(!target.Occupied())
+        {
+            ITile originalTile = this.grid[this.characterPosition.X()][this.CharacterPosition().Y()];
+            ICreature character = originalTile.CreatureInTile();
+            originalTile.UnoccupyTile();
+            this.characterPosition.SetX(x);
+            this.characterPosition.SetY(y);
+            target.SetCreature(character);
+        }
     }
     
     public Position CharacterPosition()
     {
         return this.characterPosition;
+    }
+    
+    /* Moves creature from original position to target position. Pass null if creature is not already on the map. */
+    public void MoveCreature(ICreature creature, Position original, Position target)
+    {
+        if(original != null)
+        {
+            this.grid[original.X()][original.Y()].UnoccupyTile();
+        }
+        
+        ITile targetTile = this.grid[target.X()][target.Y()];
+        if(!targetTile.Occupied())
+        {
+            this.grid[target.X()][target.Y()].SetCreature(creature);
+        }
+    }
+    
+    public void AddNPC(NPC npc)
+    {
+        if(!ContainsNPC(npc))
+        {
+            this.npcs.add(npc);
+            this.MoveCreature(npc.Creature(), null, npc.Position());
+        }
+    }
+    
+    public Position GetNPCPosition(ICreature creature)
+    {
+        for(int i = 0; i < this.npcs.size(); i++)
+        {
+            NPC currentNPC = this.npcs.get(i);
+            if(currentNPC.Creature().Name().equals(creature.Name()))
+            {
+                return currentNPC.Position();
+            }
+        }
+        return null;
+    }
+    
+    private boolean ContainsNPC(NPC npc)
+    {
+        for(int i = 0; i < this.npcs.size(); i++)
+        {
+            if(this.npcs.get(i).Creature().Name().equals(npc.Creature().Name()))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     public boolean TileTravelable(int x, int y)
@@ -49,14 +111,78 @@ public abstract class IMap {
         this.grid[x][y].SetVisited(visited);
     }
     
-    public void PrintMap() throws IOException
-    {
-        PrintMap printer = new PrintMap();
-        printer.WriteMap(this.grid, this.characterPosition.X(), this.characterPosition.Y());
-    }
-    
     public boolean InBounds(int x, int y)
     {
         return x >= 0 && x < this.grid.length && y >= 0 && y < this.grid.length;
+    }
+    
+    @Override
+    public String toString()
+    {
+        int padding = this.SetPadding(this.grid);
+        MapDescription key = new MapDescription();
+        
+        //Label x axis
+        String mapString = AddPadding(" ", " ", padding) + " ";
+        for(int x = 0; x < this.grid.length; x++)
+        {
+            String nextPart = "" + x;
+            nextPart = AddPadding(nextPart, "0", padding);
+            nextPart += " ";
+            mapString += nextPart;
+        }
+        mapString += "\r\n";
+        
+        for(int y = 0; y < this.grid[0].length; y++)
+        {
+            String line = AddPadding("" + y, "0", padding);
+            line += " ";
+            for(int x = 0; x < this.grid.length; x++)
+            {
+                ITile currentTile = this.grid[x][y];
+                if(currentTile.Occupied())
+                {
+                    line += AddPadding(currentTile.CreatureInTile().GraphicalRepresentation(), " ", padding);
+                }
+                else if(currentTile.HasVisited())
+                {
+                    String rep = "" + currentTile.GraphicalRepresentation();
+                    line +=  AddPadding(rep, " ", padding);
+                    key.Put(rep, currentTile.Name());
+                }
+                else
+                {
+                    line += AddPadding("*", " ", padding);
+                    key.Put("*", "Unknown Territory");
+                }
+                line += " ";
+            }
+            line += "\r\n";
+            mapString += line;
+        }
+        mapString += key.toString();
+        return mapString;
+    }
+    
+    private String AddPadding(String number, String pad, int paddingCeiling)
+    {
+        String padded = number;
+        while(padded.length() < paddingCeiling)
+        {
+            padded = pad + padded;
+        }
+        return padded;
+    }
+    
+    private int SetPadding(ITile[][] grid)
+    {
+        int paddingCeiling = 1;
+        int length = grid.length;
+        while(length > 9)
+        {
+            paddingCeiling++;
+            length /= 10;
+        }
+        return paddingCeiling;
     }
 }

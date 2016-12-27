@@ -13,7 +13,7 @@ import textadventure.State;
 
 /**
  *
- * @author xbone
+ * @author MaxM
  */
 public class Travel implements ICommand {
 

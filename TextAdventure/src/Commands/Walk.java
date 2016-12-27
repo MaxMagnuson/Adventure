@@ -23,7 +23,7 @@ public class Walk implements ICommand {
         
         if(action.length != 1)
         {
-            output.add("command \"walk\" must be followed be north, south, east, or west");
+            output.add("command \"walk\" must be followed by north, south, east, or west");
             return output;
         }
         String direction = action[0];

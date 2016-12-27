@@ -5,6 +5,7 @@
  */
 package Maps;
 
+import Creatures.ICreature;
 import Maps.Tiles.ITile;
 import Maps.Tiles.Mountain;
 import Maps.Tiles.Plains;
@@ -15,11 +16,12 @@ import SharedLibrary.Position;
  * @author MaxM
  */
 public class OverWorld extends IMap {
-    public OverWorld(int x, int y)
+    public OverWorld(int x, int y, ICreature character)
     {
         this.grid = new ITile[10][10];
-        this.characterPosition = new Position(x, y);
         this.FillTiles();
+        this.characterPosition = new Position(x, y);
+        this.MoveCreature(character, null, this.characterPosition);
         this.grid[x][y].SetVisited(true);
     }
     

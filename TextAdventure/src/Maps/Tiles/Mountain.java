@@ -16,5 +16,6 @@ public class Mountain extends ITile {
         this.description = "You are facing a towering crag. It would be unwise to travel further. It appears to be insurmountainable.";
         this.representation = 'm';
         this.name = "Mountains";
+        this.creature = null;
     }
 }

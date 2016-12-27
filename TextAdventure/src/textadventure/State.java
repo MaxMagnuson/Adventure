@@ -5,6 +5,8 @@
  */
 package textadventure;
 
+import Creatures.ICreature;
+import Creatures.Player;
 import Maps.IMap;
 import Maps.OverWorld;
 
@@ -15,15 +17,23 @@ import Maps.OverWorld;
 public class State {
     private OverWorld overWorld;
     private IMap currentCharacterMap;
+    private ICreature player;
+    private String filePath = "D:\\Adventure\\Overworld.txt";
     
     public State()
     {
-        this.overWorld = new OverWorld(5, 5);
+        this.player = new Player("Unnamed hero");
+        this.overWorld = new OverWorld(5, 5, this.player);
         this.currentCharacterMap = this.overWorld;
     }
     
     public IMap GetCurrentMap()
     {
         return this.currentCharacterMap;
+    }
+    
+    public String FilePath()
+    {
+        return this.filePath;
     }
 }

@@ -3,18 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Adventure/TextAdventure/src/textadventure/TextAdventure.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Combat/BattleSequence.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Creatures/Player.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/Creatures/ICreature.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/IO/Prompt.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/Commands/Walk.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/Maps/Tiles/ITile.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Commands/CommandMapFactory.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/Maps/Tiles/OpenBattleTile.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Creatures/Bat.java</file>
-            <file>file:/D:/Adventure/TextAdventure/src/Maps/IMap.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/AI/BasicMelee.java</file>
             <file>file:/D:/Adventure/TextAdventure/src/Commands/Attack.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/textadventure/TextAdventure.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Combat/BattleSequence.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Commands/CommandMapFactory.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Creatures/Bat.java</file>
+            <file>file:/D:/Adventure/TextAdventure/src/Maps/IMap.java</file>
         </group>
     </open-files>
 </project-private>

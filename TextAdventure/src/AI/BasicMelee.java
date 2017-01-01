@@ -5,6 +5,7 @@
  */
 package AI;
 
+import Combat.Weapons.IWeapon;
 import Creatures.ICreature;
 import Maps.IMap;
 import SharedLibrary.Position;
@@ -26,14 +27,14 @@ public class BasicMelee implements IAI {
         Position newCreaturePos = null;
         if(creaturePos.Adjacent(playerPos))
         {
-            //TODO: Attack
+            this.Attack(creature, state.GetPlayer());
         }
         else
         {
             newCreaturePos = this.Move(map, creature, playerPos, creature.Speed());
             if(newCreaturePos.Adjacent(playerPos))
             {
-                //TODO: Attack
+                this.Attack(creature, state.GetPlayer());
             }
             else
             {
@@ -70,5 +71,11 @@ public class BasicMelee implements IAI {
             map.MoveCreature(creature, creaturePos, closestToPlayer);
         }
         return closestToPlayer;
+    }
+    
+    private void Attack(ICreature enemy, ICreature player)
+    {
+        IWeapon enemyWep = enemy.Weapon();
+        player.Health().TakeWound(enemyWep.Damage());
     }
 }

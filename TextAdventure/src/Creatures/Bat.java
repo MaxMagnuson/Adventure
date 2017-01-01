@@ -8,6 +8,7 @@ package Creatures;
 import AI.BasicMelee;
 import AI.IAI;
 import Combat.HealthBar;
+import Combat.Weapons.Dagger;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Bat extends ICreature implements IEnemy {
         this.health = new HealthBar(this.minorToMajor, this.majorToMortal);
         this.speed = 1;
         this.ai = new BasicMelee();
+        this.weapon = new Dagger();
     }
 
     private IAI ai;

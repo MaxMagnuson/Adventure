@@ -5,13 +5,15 @@
  */
 package Creatures;
 
+import AI.BasicMelee;
+import AI.IAI;
 import Combat.HealthBar;
 
 /**
  *
  * @author MaxM
  */
-public class Bat extends ICreature {
+public class Bat extends ICreature implements IEnemy {
     public Bat(String name)
     {
         this.name = name;
@@ -20,5 +22,12 @@ public class Bat extends ICreature {
         this.majorToMortal = 1;
         this.health = new HealthBar(this.minorToMajor, this.majorToMortal);
         this.speed = 1;
+        this.ai = new BasicMelee();
+    }
+
+    private IAI ai;
+    @Override
+    public IAI AI() {
+        return this.ai;
     }
 }

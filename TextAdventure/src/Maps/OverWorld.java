@@ -9,7 +9,9 @@ import Creatures.ICreature;
 import Maps.Tiles.ITile;
 import Maps.Tiles.Mountain;
 import Maps.Tiles.Plains;
+import SharedLibrary.NPC;
 import SharedLibrary.Position;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +21,7 @@ public class OverWorld extends IMap {
     public OverWorld(int x, int y, ICreature character)
     {
         this.grid = new ITile[10][10];
+        this.npcs = new ArrayList<NPC>();
         this.FillTiles();
         this.characterPosition = new Position(x, y);
         this.MoveCreature(character, null, this.characterPosition);

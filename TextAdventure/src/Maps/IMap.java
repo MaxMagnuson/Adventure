@@ -44,16 +44,38 @@ public abstract class IMap {
     /* Moves creature from original position to target position. Pass null if creature is not already on the map. */
     public void MoveCreature(ICreature creature, Position original, Position target)
     {
-        if(original != null)
-        {
-            this.grid[original.X()][original.Y()].UnoccupyTile();
-        }
-        
         ITile targetTile = this.grid[target.X()][target.Y()];
         if(!targetTile.Occupied())
         {
+            if(original != null)
+            {
+                this.grid[original.X()][original.Y()].UnoccupyTile();
+            }
             this.grid[target.X()][target.Y()].SetCreature(creature);
+            this.UpdateNPCPosition(creature, target);
         }
+    }
+    
+    private void UpdateNPCPosition(ICreature creature, Position newPos)
+    {
+        NPC current = this.GetNPC(creature);
+        if(current != null)
+        {
+            current.SetPosition(newPos.X(), newPos.Y());
+        }
+    }
+    
+    private NPC GetNPC(ICreature creature)
+    {
+        for(int i = 0; i < this.npcs.size(); i++)
+        {
+            NPC current = this.npcs.get(i);
+            if(current.Creature().equals(creature))
+            {
+                return current;
+            }
+        }
+        return null;
     }
     
     public void AddNPC(NPC npc)
@@ -110,6 +132,13 @@ public abstract class IMap {
                 this.npcs.remove(i);
             }
         }
+    }
+    
+    public boolean CanMoveTo(Position position)
+    {
+        int x = position.X();
+        int y = position.Y();
+        return this.InBounds(x, y) && this.grid[x][y].HasVisited() && this.grid[x][y].Travelable() && !this.grid[x][y].Occupied();
     }
     
     public boolean TileTravelable(int x, int y)

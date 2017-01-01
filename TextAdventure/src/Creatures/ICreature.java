@@ -62,4 +62,9 @@ public abstract class ICreature {
     {
         this.dead = dead;
     }
+    
+    public boolean equals(ICreature diff)
+    {
+        return this.name.equals(diff.Name());
+    }
 }

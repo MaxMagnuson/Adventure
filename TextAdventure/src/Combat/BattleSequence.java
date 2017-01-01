@@ -10,6 +10,7 @@ import Commands.CommandMapFactory.CommandSet;
 import Commands.ICommand;
 import Creatures.Bat;
 import Creatures.ICreature;
+import Creatures.IEnemy;
 import Creatures.Player;
 import IO.Prompt;
 import Maps.IMap;
@@ -35,7 +36,7 @@ public class BattleSequence {
         this.battleMap = state.GetCurrentMap();
         this.player = state.GetPlayer();
         this.GenerateEnemies();
-        this.prompt =  new Prompt();
+        this.prompt = new Prompt();
         this.state = state;
         this.commands = new CommandMapFactory(CommandSet.COMBAT);
     }
@@ -59,10 +60,9 @@ public class BattleSequence {
             if(currentCreature instanceof Player)
             {
                 String mapString = this.battleMap.toString();
-                Prompt prompt = new Prompt();
                 ArrayList<String> messagesToPlayer = new ArrayList<String>();
                 messagesToPlayer.add(mapString);
-                String[] commandInput = prompt.Ask(messagesToPlayer);
+                String[] commandInput = this.prompt.Ask(messagesToPlayer);
 
                 String[] actions = new String[commandInput.length-1];
                 System.arraycopy(commandInput, 1, actions, 0, actions.length);
@@ -80,11 +80,19 @@ public class BattleSequence {
                 if(currentCreature.IsDead())
                 {
                     this.state.GetCurrentMap().RemoveNPC(currentCreature);
-                    queue.Remove(walk);
+                    queue.Remove(current);
                 }
-                else if(currentCreature.Health().MortallyWounded())
+                else
                 {
-                    currentCreature.SetDeath(true);
+                    if(currentCreature.Health().MortallyWounded())
+                    {
+                        currentCreature.SetDeath(true);
+                    }
+                    
+                    if(currentCreature instanceof IEnemy){
+                        IEnemy enemy = (IEnemy) currentCreature;
+                        enemy.AI().TakeTurn(state, currentCreature);
+                    }
                 }
             }
         }

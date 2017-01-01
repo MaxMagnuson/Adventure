@@ -55,4 +55,9 @@ public class Position {
         int yDist = Math.abs(this.y - diff.Y());
         return xDist + yDist;
     }
+    
+    public boolean Adjacent(Position diff)
+    {
+        return this.ManhattanDist(diff) == 1;
+    }
 }

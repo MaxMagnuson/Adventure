@@ -20,9 +20,9 @@ public class GenericBattleMap extends IMap {
     public GenericBattleMap()
     {
         this.grid = new ITile[5][5];
+        this.npcs = new ArrayList<NPC>();
         this.FillTiles();
         this.characterPosition = new Position(2, 4);
-        this.npcs = new ArrayList<NPC>();
     }
             
     @Override

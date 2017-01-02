@@ -73,26 +73,27 @@ public class BattleSequence {
                 {
                     System.out.println(out);
                 }
-                if(currentCreature.IsDead())
-                {
-                    System.out.println("You hath been slain!");
-                }
             }
             else
             {
-                if(currentCreature instanceof IEnemy){
-                    IEnemy enemy = (IEnemy) currentCreature;
-                    enemy.AI().TakeTurn(state, currentCreature);
-                }
+                // TODO: Will need to do actions before dying
                 if(currentCreature.IsDead())
                 {
                     this.state.GetCurrentMap().RemoveNPC(currentCreature);
                     queue.Remove(current);
                 }
-            }
-            if(currentCreature.Health().MortallyWounded())
-            {
-                currentCreature.SetDeath(true);
+                else
+                {
+                    if(currentCreature.Health().MortallyWounded())
+                    {
+                        currentCreature.SetDeath(true);
+                    }
+                    
+                    if(currentCreature instanceof IEnemy){
+                        IEnemy enemy = (IEnemy) currentCreature;
+                        enemy.AI().TakeTurn(state, currentCreature);
+                    }
+                }
             }
         }
         if(state.GetPlayer().IsDead())

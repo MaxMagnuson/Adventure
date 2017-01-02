@@ -34,10 +34,6 @@ public abstract class ICreature {
     
     public HealthBar Health()
     {
-        if(this.health == null)
-        {
-            this.health = new HealthBar(this.minorToMajor, this.majorToMortal);
-        }
         return this.health;
     }
     

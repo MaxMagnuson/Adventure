@@ -5,7 +5,6 @@
  */
 package Creatures;
 
-import Combat.HealthBar;
 import Combat.Weapons.Dagger;
 
 /**
@@ -20,7 +19,6 @@ public class Player extends ICreature {
         this.EquipWeapon(new Dagger());
         this.minorToMajor = 3;
         this.majorToMortal = 2;
-        this.health = new HealthBar(minorToMajor, majorToMortal);
         this.speed = 2;
     }
 }

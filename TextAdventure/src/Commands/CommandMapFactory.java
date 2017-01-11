@@ -27,7 +27,8 @@ public class CommandMapFactory {
         this.commandMap = new HashMap<String, ICommand>();
         if(set == CommandSet.OVERWORLD)
         {
-           this.commandMap.put("print", new Print()); 
+           this.commandMap.put("print", new Print());
+           this.commandMap.put("setpath", new SetFilePath());
         }
         else if(set == CommandSet.COMBAT)
         {

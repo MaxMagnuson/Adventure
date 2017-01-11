@@ -53,4 +53,9 @@ public class State {
     {
         return this.filePath;
     }
+    
+    public void SetPath(String path)
+    {
+        this.filePath = path;
+    }
 }

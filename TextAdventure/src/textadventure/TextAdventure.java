@@ -7,6 +7,7 @@ package textadventure;
 
 import Combat.BattleSequence;
 import Commands.CommandMapFactory;
+import Commands.CommandMapFactory.CommandSet;
 import Commands.ICommand;
 import Creatures.ICreature;
 import Creatures.Player;
@@ -27,8 +28,8 @@ public class TextAdventure {
     public static void main(String[] args) throws IOException {
         //ConsoleHandler handler = new ConsoleHandler();
         //handler.Start();
-        /*Scanner scan = new Scanner(System.in);
-        CommandMapFactory commandMap = new CommandMapFactory();
+        Scanner scan = new Scanner(System.in);
+        CommandMapFactory commandMap = new CommandMapFactory(CommandSet.OVERWORLD);
         State state = new State();
         while(true)
         {
@@ -51,13 +52,15 @@ public class TextAdventure {
                     System.out.println(output);
                 }
             }
-        }*/
+        }
+        /*
         GenericBattleMap map = new GenericBattleMap();
         ICreature player = new Player("Unnamed Hero");
         State state = new State(player);
         state.SetCurrentMap(map);
         BattleSequence sequence = new BattleSequence(state);
         sequence.Start();
+        */
     }
     
 }

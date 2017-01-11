@@ -23,7 +23,7 @@ public class Print implements ICommand {
         try {
             String mapString = state.GetCurrentMap().toString();
             PrintFile printer = new PrintFile();
-            printer.Print(mapString, state.FilePath());
+            printer.Print(mapString, state.FilePath() + "\\Overworld.txt");
         } catch (IOException ex) {
             Logger.getLogger(Print.class.getName()).log(Level.SEVERE, null, ex);
         }

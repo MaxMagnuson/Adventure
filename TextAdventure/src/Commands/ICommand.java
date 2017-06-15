@@ -14,4 +14,5 @@ import textadventure.State;
  */
 public interface ICommand {
     ArrayList<String> Act(String[] action, State state);
+    String Description();
 }

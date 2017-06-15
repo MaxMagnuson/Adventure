@@ -19,6 +19,12 @@ import textadventure.State;
 public class Print implements ICommand {
     
     @Override
+    public String Description()
+    {
+        return "Command \"print\" prints the map the player is currently located on to the set file path.";
+    }
+    
+    @Override
     public ArrayList<String> Act(String[] action, State state) {
         try {
             String mapString = state.GetCurrentMap().toString();

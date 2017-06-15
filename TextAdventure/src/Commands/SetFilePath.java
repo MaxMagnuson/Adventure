@@ -15,6 +15,12 @@ import textadventure.State;
 public class SetFilePath implements ICommand {
 
     @Override
+    public String Description()
+    {
+        return "Command \"setpath\" sets the file path for any commands that create files.";
+    }
+    
+    @Override
     public ArrayList<String> Act(String[] action, State state) {
         ArrayList<String> messages = new ArrayList<String>();
         

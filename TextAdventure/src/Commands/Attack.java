@@ -17,14 +17,20 @@ import textadventure.State;
  * @author MaxM
  */
 public class Attack implements ICommand {
-    private final String errorMsg = "command \"attack\" must be followed by only north, south, east, or west";
+    private final String errorMsg = "Command \"attack\" must be followed by only north, south, east, or west";
+    
+    @Override
+    public String Description()
+    {
+        return "Command \"attack\" attacks select squares based on the weapon pattern in the cardinal direction given.";
+    }
     
     @Override
     public ArrayList<String> Act(String[] action, State state) {
         ArrayList<String> output = new ArrayList<String>();
         if(action.length != 1)
         {
-            output.add("errorMsg");
+            output.add(errorMsg);
             return output;
         }
         

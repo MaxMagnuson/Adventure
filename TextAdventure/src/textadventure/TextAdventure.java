@@ -11,6 +11,7 @@ import Commands.CommandMapFactory.CommandSet;
 import Commands.ICommand;
 import Creatures.ICreature;
 import Creatures.Player;
+import IO.ConsoleHandler;
 import Maps.GenericBattleMap;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,8 +27,10 @@ public class TextAdventure {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        //ConsoleHandler handler = new ConsoleHandler();
-        //handler.Start();
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.Start();
+        
+        /*
         Scanner scan = new Scanner(System.in);
         CommandMapFactory commandMap = new CommandMapFactory(CommandSet.OVERWORLD);
         State state = new State();
@@ -53,6 +56,8 @@ public class TextAdventure {
                 }
             }
         }
+        */
+        
         /*
         GenericBattleMap map = new GenericBattleMap();
         ICreature player = new Player("Unnamed Hero");

@@ -26,12 +26,11 @@ public class ConsoleHandler implements IIOHandler {
     public void Start()
     {
         CommandMapFactory commandMap = new CommandMapFactory();
-        State state = new State();
+        State state = new State(commandMap);
         while(true)
         {
             String input = this.scan.nextLine();
             input = input.toLowerCase();
-            System.out.print("Input: " + input);
             String[] inputTokens = input.split(" ");
             ICommand command = commandMap.Command(inputTokens[0]);
             if(command == null)
@@ -41,13 +40,13 @@ public class ConsoleHandler implements IIOHandler {
             else
             {
                 String[] actions = new String[inputTokens.length-1];
-            System.arraycopy(inputTokens, 1, actions, 0, actions.length);
+                System.arraycopy(inputTokens, 1, actions, 0, actions.length);
             
-            ArrayList<String> consoleOutput = command.Act(actions, state);
-            for(String output : consoleOutput)
-            {
-                System.out.println(output);
-            }
+                ArrayList<String> consoleOutput = command.Act(actions, state);
+                for(String output : consoleOutput)
+                {
+                    System.out.println(output);
+                }
             }
         }
     }

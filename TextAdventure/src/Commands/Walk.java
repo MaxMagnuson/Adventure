@@ -17,6 +17,13 @@ import textadventure.State;
 public class Walk implements ICommand {
     private IMap overworld;
     
+    @Override
+    public String Description()
+    {
+        return "Command \"walk\" takes in a coordinate direction and attempts to"
+                + " move the player one space in that direction.";
+    }
+    
     public ArrayList<String> Act(String[] action, State state)
     {
         ArrayList<String> output = new ArrayList<String>();

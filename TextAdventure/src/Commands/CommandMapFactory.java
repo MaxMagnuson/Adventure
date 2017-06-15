@@ -5,6 +5,7 @@
  */
 package Commands;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -20,6 +21,8 @@ public class CommandMapFactory {
         this.commandMap.put("walk", new Walk());
         this.commandMap.put("print", new Print());
         this.commandMap.put("travel", new Travel());
+        this.commandMap.put("!commands", new Commands());
+        this.commandMap.put("!describe", new Describe());
     }
     
     public CommandMapFactory(CommandSet set)
@@ -28,7 +31,7 @@ public class CommandMapFactory {
         if(set == CommandSet.OVERWORLD)
         {
            this.commandMap.put("print", new Print());
-           this.commandMap.put("setpath", new SetFilePath());
+           this.commandMap.put("!setpath", new SetFilePath());
         }
         else if(set == CommandSet.COMBAT)
         {
@@ -36,6 +39,8 @@ public class CommandMapFactory {
         }
         this.commandMap.put("walk", new Walk());
         this.commandMap.put("travel", new Travel());
+        this.commandMap.put("!commands", new Commands());
+        this.commandMap.put("!describe", new Describe());
     }
     
     public ICommand Command(String key)
@@ -50,5 +55,17 @@ public class CommandMapFactory {
     public enum CommandSet
     {
         COMBAT, OVERWORLD
+    }
+    
+    public ArrayList<String> AvailableCommands()
+    {
+        Object[] commands = this.commandMap.keySet().toArray();
+        ArrayList<String> listOfCommands = new ArrayList<String>();
+        for(int i = 0; i < commands.length; i++)
+        {
+            String current = commands[i].toString();
+            listOfCommands.add(current);
+        }
+        return listOfCommands;
     }
 }

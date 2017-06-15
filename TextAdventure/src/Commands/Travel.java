@@ -6,7 +6,6 @@
 package Commands;
 
 import Maps.IMap;
-import Maps.Tiles.ITile;
 import SharedLibrary.Position;
 import java.util.ArrayList;
 import textadventure.State;
@@ -17,6 +16,13 @@ import textadventure.State;
  */
 public class Travel implements ICommand {
 
+    @Override
+    public String Description()
+    {
+        return "Command \"travel\" takes in an x and y coordinate of a map and attempts to move"
+                + " the player to that location.";
+    }
+    
     @Override
     public ArrayList<String> Act(String[] action, State state) {
         ArrayList<String> output = new ArrayList<String>();

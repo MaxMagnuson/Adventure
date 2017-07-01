@@ -11,8 +11,10 @@ import Commands.CommandMapFactory.CommandSet;
 import Commands.ICommand;
 import Creatures.ICreature;
 import Creatures.Player;
+import static FileReaders.FileToMap.FileToMap;
 import IO.ConsoleHandler;
 import Maps.GenericBattleMap;
+import Maps.IMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,8 +29,19 @@ public class TextAdventure {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.Start();
+        //ConsoleHandler handler = new ConsoleHandler();
+        //handler.Start();
+        
+        String path = "C:\\Users\\MaxM\\Desktop\\TestMap.txt";
+        IMap map = FileToMap(path);
+        for(int x = 0; x < 6; x++)
+        {
+            for(int y = 0; y < 5; y++)
+            {
+                map.SetVisited(x, y, true);
+            }
+        }
+        System.out.println(map.toString());
         
         /*
         Scanner scan = new Scanner(System.in);

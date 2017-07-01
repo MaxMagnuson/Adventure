@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public abstract class IMap {
     protected Position characterPosition;
     protected ITile[][] grid;
-    abstract void FillTiles();
     protected ArrayList<NPC> npcs;
     
     /* Should probably be consolidated with MoveCreature at some point */
@@ -41,7 +40,8 @@ public abstract class IMap {
         return this.characterPosition;
     }
     
-    /* Moves creature from original position to target position. Pass null if creature is not already on the map. */
+    /* Moves creature from original position to target position. 
+       Pass null for original if creature is not already on the map. */
     public void MoveCreature(ICreature creature, Position original, Position target)
     {
         ITile targetTile = this.grid[target.X()][target.Y()];

@@ -25,8 +25,7 @@ public class GenericBattleMap extends IMap {
         this.characterPosition = new Position(2, 4);
     }
             
-    @Override
-    void FillTiles() 
+    private void FillTiles() 
     {
         for(int x = 0; x < this.grid.length; x++)
         {

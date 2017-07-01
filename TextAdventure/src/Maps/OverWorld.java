@@ -28,7 +28,7 @@ public class OverWorld extends IMap {
         this.grid[x][y].SetVisited(true);
     }
     
-    void FillTiles()
+    private void FillTiles()
     {
         int xMax = this.grid.length;
         int yMax = this.grid[0].length;
